@@ -1,0 +1,29 @@
+plugins {
+    id 'java'
+}
+
+group = 'com.client'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-webflux:3.1.2'
+    implementation 'com.formdev:flatlaf:3.2.5'
+    implementation 'com.miglayout:miglayout-swing:11.2'
+    implementation 'com.formdev:flatlaf-intellij-themes:3.2.5'
+    implementation 'com.jgoodies:jgoodies-validation:2.5.1'
+    implementation 'org.apache.commons:commons-lang3:3.14.0'
+    implementation 'net.sf.oval:oval:3.2.1'
+    implementation 'org.commonmark:commonmark:0.21.0'
+
+
+    testImplementation platform('org.junit:junit-bom:5.9.1')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+test {
+    useJUnitPlatform()
+}
