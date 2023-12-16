@@ -47,19 +47,22 @@ public class Register extends JPanel {
         username = new PlaceholderTextField("Username");
         phone = new PlaceholderTextField("Phone");
         password = new PlaceholderPasswordField("Password");
-        register = new CustomButton("Register", 15);
+        register = new CustomButton("Sign Up", 15);
         login = new CustomButton("Login", 15);
         backendCommunicator = new BackendCommunicator();
 
         setLayout(new MigLayout("insets 10, fillx", "[grow][]", "[]"));
         main.setSize(350, 400);
-        add(name, "span, growx, wrap, gapbottom 10");
-        add(email, "span, growx, wrap, gapbottom 10");
-        add(username, "span, growx, wrap, gapbottom 10");
-        add(phone, "span, growx, wrap, gapbottom 10");
-        add(password, "span, growx, wrap, gapbottom 10");
-        add(register, "span, split 2, growx, sizegroup btn, align center, gapright 15");
-        add(login, "span, split 2, growx, sizegroup btn, align center, gapright 15");
+        JPanel all = new JPanel(new MigLayout("insets 10, align center"));
+        all.add(name, "span, growx, wrap, gapbottom 15");
+        all.add(email, "span, growx, wrap, gapbottom 15");
+        all.add(username, "span, growx, wrap, gapbottom 15");
+        all.add(phone, "span, growx, wrap, gapbottom 15");
+        all.add(password, "span, growx, wrap, gapbottom 15");
+        all.add(register, "span, split 2, growx, sizegroup btn, align center, gapright 15");
+        all.add(login, "span, split 2, growx, sizegroup btn, align center, gapright 15");
+
+        add(all, "push, align center, w 500");
 
         login.addActionListener(e -> {
             main.updateCardPanel(new Login(main), "login");

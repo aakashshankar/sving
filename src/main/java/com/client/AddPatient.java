@@ -1,15 +1,13 @@
 package com.client;
 
 import com.client.api.response.PatientResponse;
-import com.client.components.AudioRecorder;
-import com.client.components.CustomButton;
-import com.client.components.PlaceholderTextAreaPane;
-import com.client.components.PlaceholderTextField;
+import com.client.components.*;
 import com.client.service.BackendCommunicator;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import net.miginfocom.swing.MigLayout;
 import net.sf.oval.constraint.NotEmpty;
+import net.sf.oval.constraint.NotEqual;
 import net.sf.oval.constraint.NotNull;
 import org.apache.commons.lang3.StringUtils;
 
@@ -80,23 +78,25 @@ public class AddPatient extends JPanel {
 
         recordButton = new CustomButton("Record", 16);
         browseButton = new CustomButton("Browse", 16);
-        backButton = new JButton("Back");
+        backButton = new BackButton();
         saveButton = new CustomButton("Save", 16);
         summaryButton = new CustomButton("Summarize", 16);
-        logoutButton = new JButton("Logout");
+        logoutButton = new LogoutButton();
 
-        add(backButton, "split 2, span, align right");
+        add(backButton, "align left");
         add(logoutButton, "align right, wrap");
         add(firstName, "split 2, align center, gapright 20");
         add(lastName, "align center, wrap");
         add(transcriptionScrollPane, "span, grow, wrap");
         add(summaryScrollPane, "span, grow, wrap");
 
-        add(browseButton, "split 2, align center");
-        add(recordButton, "align center, wrap");
-        add(summaryButton, "split 2, align center");
-        add(saveButton, "align center");
-
+        JPanel buttonsPanel = new JPanel(new MigLayout("insets 15, gap 20 15", "[grow, fill]",
+                "[grow, fill]"));
+        add(buttonsPanel, "span, grow, wrap");
+        buttonsPanel.add(browseButton, "grow");
+        buttonsPanel.add(recordButton, "grow, wrap");
+        buttonsPanel.add(summaryButton, "grow");
+        buttonsPanel.add(saveButton, "grow");
 
         browseButton.addActionListener(e -> {
             JFileChooser fileChooser = new JFileChooser();
@@ -202,6 +202,7 @@ public class AddPatient extends JPanel {
 
         @NotNull
         @NotEmpty(message = "Summarize the transcription")
+        @NotEqual(value = "Clinical Notes", message = "Summarize the transcription")
         private String clinicalNote;
     }
 }

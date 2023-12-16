@@ -1,8 +1,7 @@
 package com.client;
 
 import com.client.api.response.PatientResponse;
-import com.client.components.PlaceholderTextAreaPane;
-import com.client.components.PlaceholderTextField;
+import com.client.components.*;
 import com.client.converter.PatientResponseToSummaryConverter;
 import com.client.model.Attribute;
 import com.client.service.BackendCommunicator;
@@ -77,7 +76,7 @@ public class Patient extends JPanel {
         firstNameField.setColumns(20);
         lastNameField.setColumns(20);
 
-        backButton = new JButton("Back");
+        backButton = new BackButton();
         backButton.addActionListener(e -> {
             try {
                 Set<PatientResponse> patientResponses =
@@ -90,7 +89,7 @@ public class Patient extends JPanel {
             }
         });
 
-        deleteButton = new JButton("Delete");
+        deleteButton = new DeleteButton();
         deleteButton.addActionListener(e -> {
             try {
                 HttpResponse<String> response = backendCommunicator.deletePatient(this.sessionId, this.username, this.patientId);
@@ -107,11 +106,23 @@ public class Patient extends JPanel {
                 exception.printStackTrace();
             }
         });
-        add(logoutButton, "align left");
-        add(backButton, "split 2, align left");
-        add(deleteButton, "align left, wrap");
-        add(firstNameField, "split 2, align center, gapright 20");
-        add(lastNameField, "align center, wrap");
+        logoutButton = new LogoutButton();
+        logoutButton.addActionListener(e -> {
+            try {
+                main.updateCardPanel(new Login(main), "login");
+                main.switchTo("login");
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
+        });
+        add(backButton, "align left");
+        add(deleteButton, "align right");
+        add(logoutButton, "align right, wrap");
+
+        JPanel names = new JPanel(new MigLayout("insets 10", "[]", "[grow, fill]"));
+        names.add(firstNameField, "split 2, align center");
+        names.add(lastNameField, "align center, wrap");
+        add(names, "span, align center, wrap");
         add(scrollPane, "span, grow, wrap");
     }
 

@@ -16,6 +16,7 @@ import net.sf.oval.constraint.NotNull;
 import org.springframework.http.HttpStatus;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.IOException;
 import java.net.http.HttpResponse;
 import java.util.List;
@@ -35,16 +36,23 @@ public class Login extends JPanel {
         username = new PlaceholderTextField("Username");
         password = new PlaceholderPasswordField("Password");
         login = new CustomButton("Login", 15);
-        register = new CustomButton("Register", 15);
+        register = new CustomButton("Sign Up", 15);
         backendCommunicator = new BackendCommunicator();
+
+        login.setPreferredSize(new Dimension(100, 30));
+        register.setPreferredSize(new Dimension(100, 30));
 
         setLayout(new MigLayout("insets 10, fillx", "[grow][]", "[]"));
         main.setSize(350, 400);
 
-        add(username, "span, growx, wrap, gapbottom 10");
-        add(password, "span, growx, wrap, gapbottom 10");
-        add(login, "align center, span, split 2, gapright 15");
-        add(register, "align center");
+        JPanel all = new JPanel(new MigLayout("insets 5, align center"));
+
+        all.add(username, "span, growx, wrap, gapbottom 20, w 200");
+        all.add(password, "span, growx, wrap, gapbottom 15");
+        all.add(login, "align center, span, split 2, gapright 15");
+        all.add(register, "align center");
+
+        add(all, "push, align center, w 500");
 
         register.addActionListener(e -> {
             try {

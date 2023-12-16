@@ -13,6 +13,8 @@ public class Main extends JFrame {
 
    private JPanel cardPanel;
 
+   private JMenuBar menuBar;
+
     public Main() throws HeadlessException, IOException {
         cardLayout = new CardLayout();
         cardPanel = new JPanel(cardLayout);
@@ -20,9 +22,15 @@ public class Main extends JFrame {
         cardPanel.add(new Login(this), "login");
         cardPanel.add(new Register(this), "register");
 
+        menuBar = new JMenuBar();
+        JMenuItem open = new JMenuItem("Exit");
+        open.addActionListener(e -> System.exit(0));
+        JMenu file = new JMenu("File");
+        file.add(open);
+        menuBar.add(file);
+
         add(cardPanel);
-
-
+//        add(menuBar, BorderLayout.NORTH);
     }
 
     public void updateCardPanel(Component component, String cardName) {
