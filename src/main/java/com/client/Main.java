@@ -9,6 +9,8 @@ import java.io.IOException;
 
 public class Main extends JFrame {
 
+    public static boolean useLocal = false;
+
     private CardLayout cardLayout;
 
    private JPanel cardPanel;
@@ -49,6 +51,8 @@ public class Main extends JFrame {
     public static void main(String[] args) throws IOException {
         System.setProperty( "apple.awt.application.appearance", "system" );
         FlatMacDarkLaf.setup();
+        useLocal = args.length > 0 && args[0].equals("local");
+        System.out.println("useLocal: " + useLocal);
 
         Main main = new Main();
         main.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
