@@ -16,7 +16,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.net.http.HttpResponse;
-
 import static com.client.components.AudioRecorder.captureAudioToFile;
 
 public class AddPatient extends JPanel {

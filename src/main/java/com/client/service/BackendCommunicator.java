@@ -24,16 +24,22 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.UUID;
 
+import static com.client.Main.useLocal;
+import static java.lang.String.format;
+
 
 public class BackendCommunicator {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BackendCommunicator.class);
 
-    private static final String BASE_TENANT_URL = "http://localhost:8080/api/v1/tenant";
+    private static String BASE_URL = useLocal ? "http://localhost:8080" :
+            "https://speech-to-text-production-c702.up.railway.app";
 
-    private static final String BASE_PATIENT_URL = "http://localhost:8080/api/v1/patient";
+    private static final String BASE_TENANT_URL = format("%s/api/v1/tenant", BASE_URL);
 
-    private static final String BASE_SPEECH_TO_TEXT_URL = "http://localhost:8080/api/v1/speechtotext";
+    private static final String BASE_PATIENT_URL = format("%s/api/v1/patient", BASE_URL);
+
+    private static final String BASE_SPEECH_TO_TEXT_URL = format("%s/api/v1/speechtotext", BASE_URL);
 
     private static final String X_TENANT = "X-Tenant";
 
@@ -174,7 +180,7 @@ public class BackendCommunicator {
 
         } catch (Exception e) {
             LOGGER.error("Error occurred while attaching transcript to patient");
-            JOptionPane.showMessageDialog(null, "Error occurred while attaching tranacript to patient");
+            JOptionPane.showMessageDialog(null, "Error occurred while attaching transcript to patient");
             throw new RuntimeException(e);
         }
     }

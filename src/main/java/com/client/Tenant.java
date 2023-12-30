@@ -5,8 +5,8 @@ import com.client.components.LogoutButton;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
-import java.awt.*;
 import java.util.Collection;
+import java.util.Objects;
 import java.util.Set;
 
 public class Tenant extends JPanel {
@@ -33,7 +33,7 @@ public class Tenant extends JPanel {
         addPatientButton = new CustomButton("Add Patient", 16);
         logoutButton = new LogoutButton();
 
-        ImageIcon plusIcon = new ImageIcon("src/main/resources/plus-button.png");
+        ImageIcon plusIcon = new ImageIcon(Objects.requireNonNull(getClass().getResource("/plus-button.png")));
         plusButton = new JButton(plusIcon);
         JPanel plusPanel = new JPanel(new MigLayout("fill, insets 0", "[center]", "[center]"));
         plusPanel.add(plusButton);
